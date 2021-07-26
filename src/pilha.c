@@ -5,7 +5,7 @@
 
 // Imprimindo a Pilha
 void imprimir(Pilha *p) {
-  printf("\nPilha: \n");
+  printf("\nPilha 1 - Alagoas: \n");
 
   Pilha *aux = p;
 
@@ -51,7 +51,7 @@ Pilha* popSuperior(Pilha *p, int cod, int vol) {
   return p;
 }
 
-int retonarTamanho(Pilha *p, int contador) {
+int retornarTamanho(Pilha *p, int contador) {
   Pilha *aux = p;
   aux->info = contador;
   contador = 0;
@@ -61,7 +61,8 @@ int retonarTamanho(Pilha *p, int contador) {
     aux = aux->prox;
 
     if (contador == 10) {
-      printf("\nPilha cheia, empilhe na próxima pilha.\n");
+      printf("\nPilha cheia, empilhe na próxima pilha\n");
+      break;
     }
   }
 
@@ -70,11 +71,11 @@ int retonarTamanho(Pilha *p, int contador) {
   return 0;
 }
 
-// Fora do estado
+// Fora do estado - pilha 2
 void imprimir2(Pilha2 *q) {
-  printf("\nPilha: \n");
+  printf("\nPilha 2 - (outros estados): \n");
 
-  Pilha *aux = q;
+  Pilha2 *aux = q;
 
   while (aux != NULL) {
     printf("%d ", aux->info);
@@ -84,7 +85,7 @@ void imprimir2(Pilha2 *q) {
 }
 
 Pilha2* push2(Pilha2 *q, int valor) {
-  Pilha *aux = (Pilha *)malloc(sizeof(Pilha));
+  Pilha2 *aux = (Pilha2 *)malloc(sizeof(Pilha2));
 
   if (aux == NULL) {
     printf("\nPilha vazia");
@@ -103,8 +104,7 @@ Pilha2* push2(Pilha2 *q, int valor) {
 
 Pilha2* popSuperior2(Pilha2 *q, int cod, int vol) {
   if (q != NULL) {
-    Pilha *aux = q;
-
+    Pilha2 *aux = q;
     q = aux->prox;
 
     free(aux);
@@ -117,7 +117,8 @@ Pilha2* popSuperior2(Pilha2 *q, int cod, int vol) {
 }
 
 int retornarTamanho2(Pilha2 *q, int contador) {
-  Pilha *aux = q;
+  Pilha2 *aux = q;
+
   aux->info = contador;
   contador = 0;
 
@@ -126,20 +127,78 @@ int retornarTamanho2(Pilha2 *q, int contador) {
     aux = aux->prox;
 
     if (contador == 10) {
-      printf("\nPilha cheia, empilhe na próxima pilha.\n");
+      printf("\nPilha cheia, empilhe na próxima pilha\n");
+      break;
     }
   }
 
-  printf("\nQuantidade de elementos == %d", contador);
+  printf("\nQuantidade de elementos == %d\n", contador);
 
   return 0;
 }
 
-// Fora do Brasil
-void imprimir3(Pilha3 *q);
+// Fora do Brasil - pilha 3
+void imprimir3(Pilha3 *r) {
+  printf("\nPilha 3 - (fora do Brasil): \n");
 
-Pilha3* push3(Pilha3 *q, int valor);
+  Pilha3 *aux = r;
 
-Pilha3* popSuperior3(Pilha3 *q, int cod, int vol);
+  while (aux != NULL) {
+    printf("%d ", aux->info);
 
-int retornarTamanho3(Pilha3 *q, int contador);
+    aux = aux->prox;
+  }
+}
+
+Pilha3* push3(Pilha3 *r, int valor) {
+  Pilha3 *aux = (Pilha3 *)malloc(sizeof(Pilha3));
+
+  if (aux == NULL) {
+    printf("\nPilha vazia");
+
+    return aux;
+  }
+  else {
+    aux->info = valor;
+    aux->prox = r;
+
+    printf("\nElemento adicionado!");
+
+    return aux;
+  }
+}
+
+Pilha3* popSuperior3(Pilha3 *r, int cod, int vol) {
+  if (r != NULL) {
+    Pilha3 *aux = r;
+
+    r = aux->prox;
+
+    free(aux);
+  }
+  else {
+    printf("\nPilha vazia");
+  }
+
+  return r;
+}
+
+int retornarTamanho3(Pilha3 *r, int contador) {
+  Pilha3 *aux = r;
+  aux->info = contador;
+  contador = 0;
+
+  while (aux != NULL) {
+    contador++;
+    aux = aux->prox;
+
+    if (contador == 10) {
+      printf("\nPilha cheia, empilhe na próxima pilha\n");
+      break;
+    }
+  }
+
+  printf("\nQuantidade de elementos == %d\n", contador);
+
+  return 0;
+}
