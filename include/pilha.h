@@ -1,4 +1,4 @@
-// Alagoas
+// Estado
 struct pilha {
   int info;
   struct pilha* prox;
@@ -19,17 +19,29 @@ struct pilha3 {
 };
 typedef struct pilha3 Pilha3;
 
-struct volume {
-  int codigo;
-  float peso;
-  char origem[100];
-};
-typedef struct volume Volume;
-
+// Estado
 void imprimir(Pilha *p);
 
-Pilha *push(Pilha *p , int valor);
+Pilha* push(Pilha *p, int valor);
 
-Pilha *popSuperior(Pilha *p, int cod, int vol);
+Pilha* popSuperior(Pilha *p, int cod, int vol);
 
 int retonarTamanho(Pilha *p, int contador);
+
+// Fora do estado
+void imprimir2(Pilha2 *q);
+
+Pilha2* push2(Pilha2 *q, int valor);
+
+Pilha2* popSuperior2(Pilha2 *q, int cod, int vol);
+
+int retornarTamanho2(Pilha2 *q, int contador);
+
+// Fora do Brasil
+void imprimir3(Pilha3 *q);
+
+Pilha3* push3(Pilha3 *q, int valor);
+
+Pilha3* popSuperior3(Pilha3 *q, int cod, int vol);
+
+int retornarTamanho3(Pilha3 *q, int contador);
