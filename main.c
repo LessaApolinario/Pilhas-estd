@@ -11,25 +11,44 @@ int main(void) {
   int cont = 0;
 
   do {
-    printf("\n| 1 - para inserir um elemento\n");
-    printf("| 2 - para imprimir os elementos\n");
-    printf("| 3 - para remover um elemento\n");
-    printf("| 4 - para verificar se é palindromo\n");
+    printf("\n| 1 - para inserir da pilha (do estado)\n");
+    printf("| 2 - para inerir na pilha (fora do estado)\n");
+    printf("| 3 - para inserir na pilha (fora do Brasil)\n");
+    printf("| 4 - para consultar as pilhas\n");
     printf("| 0 - para sair\n");
     scanf("%d", &op);
 
     switch(op) {
       case 1:
-        printf("Informe a quantidade: ");
-        scanf("%d", &vol);
+        printf("Informe o código: ");
+        scanf("%d", &cod);
 
-        // Alagoas
-        inicio = push(inicio, vol);
+        inicio = push(inicio, cod);
+
+        retornarTamanho(inicio, cont);
         break;
       case 2:
-        imprimir(inicio);
+        printf("Informe o código: ");
+        scanf("%d", &cod);
+
+        inicio2 = push2(inicio2, cod);
+
+        retornarTamanho2(inicio2, cont);
         break;
       case 3:
+        printf("Informe o código: ");
+        scanf("%d", &cod);
+
+        inicio3 = push3(inicio3, cod);
+
+        retornarTamanho3(inicio3, cont);
+        break;
+      case 4:
+        imprimir(inicio);
+        imprimir2(inicio2);
+        imprimir3(inicio3);
+        break;
+      case 7:
         printf("Informe o código: ");
         scanf("%d", &cod);
 
