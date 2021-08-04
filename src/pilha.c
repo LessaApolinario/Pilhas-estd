@@ -1,204 +1,68 @@
-#include "../include/pilha.h"
+#include "pilha.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 
-// Imprimindo a Pilha
-void imprimir(Pilha *p) {
-  printf("\nPilha 1 - Alagoas: \n");
+Pilha* inicializar(Pilha *p, int limite) {
+  p->topo = -1;
+  p->limite = limite;
+  p->codigo = (int *)malloc(sizeof(int) * limite);
+  p->volume = (int *)malloc(sizeof(int) * limite);
+  p->entrou = (int *)malloc(sizeof(int) * limite);
+  p->saiu = (int *)malloc(sizeof(int) * limite);
 
-  Pilha *aux = p;
-
-  while (aux != NULL) {
-    printf("%d ", aux->info);
-
-    aux = aux->prox;
-  }
-}
-
-// Inserindo elemento
-Pilha* push(Pilha *p, int valor) {
-  Pilha *aux = (Pilha *)malloc(sizeof(Pilha));
-
-  if (aux == NULL) {
-    printf("\nPilha vazia");
-
-    return aux;
-  }
-  else {
-    aux->info = valor;
-    aux->prox = p;
-
-    printf("\nElemento adicionado!");
-
-    return aux;
-  }
-}
-
-// Removendo elemento
-Pilha* popSuperior(Pilha *p, int cod, int vol) {
-  if (p != NULL) {
-    Pilha *aux = p;
-
-    p = aux->prox;
-
-    free(aux);
-  }
-  else {
-    printf("\nPilha vazia");
-  }
+	printf("\nPilha inicializada!\n");
 
   return p;
 }
 
-int retornarTamanho(Pilha *p, int contador) {
-  Pilha *aux = p;
-  aux->info = contador;
-  contador = 0;
+void imprimir(Pilha *p) {
+  printf("\nPilha: ");
 
-  while (aux != NULL) {
-    contador++;
-    aux = aux->prox;
+	int i;
 
-    if (contador == 10) {
-      printf("\nPilha cheia, empilhe na próxima pilha\n");
-      break;
-    }
+	for (i = p->topo; i >= 0; i--){
+    printf("\nCódigo: %d Volume: %d kg", p->codigo[i], p->volume[i]);
   }
 
-  printf("\nQuantidade de elementos == %d", contador);
-
-  return 0;
+	printf("\n");
 }
 
-// Fora do estado - pilha 2
-void imprimir2(Pilha2 *q) {
-  printf("\nPilha 2 - (outros estados): \n");
+void imprimirEntrouSaiu(Pilha *p) {
+  printf("\nPilha: ");
 
-  Pilha2 *aux = q;
+	int i;
 
-  while (aux != NULL) {
-    printf("%d ", aux->info);
-
-    aux = aux->prox;
+	for (i = p->topo; i >= 0; i--) {
+    printf("\nCódigo: %d Volume: %d kg Entrou:%d vez(s) Saiu: %d vez(s)", p->codigo[i], p->volume[i],p->entrou[i], p->saiu[i]);
   }
+
+	printf("\n");
 }
 
-Pilha2* push2(Pilha2 *q, int valor) {
-  Pilha2 *aux = (Pilha2 *)malloc(sizeof(Pilha2));
+int push(Pilha *p, int valor, int volume) {
+  if (p->topo < p->limite - 1) {
+    p->topo++;
+    p->codigo[p->topo] = valor;
+    p->volume[p->topo] = volume;
 
-  if (aux == NULL) {
-    printf("\nPilha vazia");
+    printf("\nO pacote Chegou!");
+  } else {
+		printf("\nPilha cheia");
+	}
 
-    return aux;
-  }
-  else {
-    aux->info = valor;
-    aux->prox = q;
-
-    printf("\nElemento adicionado!");
-
-    return aux;
-  }
+	return 0;
 }
 
-Pilha2* popSuperior2(Pilha2 *q, int cod, int vol) {
-  if (q != NULL) {
-    Pilha2 *aux = q;
-    q = aux->prox;
+int pop(Pilha *p) {
+  if (p->topo >= 0) {
+    int aux = p->codigo[p->topo];
+    int aux2 = p->volume[p->topo];
+    p->topo--;
 
-    free(aux);
-  }
-  else {
-    printf("\nPilha vazia");
-  }
-
-  return q;
-}
-
-int retornarTamanho2(Pilha2 *q, int contador) {
-  Pilha2 *aux = q;
-
-  aux->info = contador;
-  contador = 0;
-
-  while (aux != NULL) {
-    contador++;
-    aux = aux->prox;
-
-    if (contador == 10) {
-      printf("\nPilha cheia, empilhe na próxima pilha\n");
-      break;
-    }
+    printf("\nPacote retirado!");
+  } else {
+    printf("\nPilha vazia!");
   }
 
-  printf("\nQuantidade de elementos == %d\n", contador);
-
-  return 0;
-}
-
-// Fora do Brasil - pilha 3
-void imprimir3(Pilha3 *r) {
-  printf("\nPilha 3 - (fora do Brasil): \n");
-
-  Pilha3 *aux = r;
-
-  while (aux != NULL) {
-    printf("%d ", aux->info);
-
-    aux = aux->prox;
-  }
-}
-
-Pilha3* push3(Pilha3 *r, int valor) {
-  Pilha3 *aux = (Pilha3 *)malloc(sizeof(Pilha3));
-
-  if (aux == NULL) {
-    printf("\nPilha vazia");
-
-    return aux;
-  }
-  else {
-    aux->info = valor;
-    aux->prox = r;
-
-    printf("\nElemento adicionado!");
-
-    return aux;
-  }
-}
-
-Pilha3* popSuperior3(Pilha3 *r, int cod, int vol) {
-  if (r != NULL) {
-    Pilha3 *aux = r;
-
-    r = aux->prox;
-
-    free(aux);
-  }
-  else {
-    printf("\nPilha vazia");
-  }
-
-  return r;
-}
-
-int retornarTamanho3(Pilha3 *r, int contador) {
-  Pilha3 *aux = r;
-  aux->info = contador;
-  contador = 0;
-
-  while (aux != NULL) {
-    contador++;
-    aux = aux->prox;
-
-    if (contador == 10) {
-      printf("\nPilha cheia, empilhe na próxima pilha\n");
-      break;
-    }
-  }
-
-  printf("\nQuantidade de elementos == %d\n", contador);
-
-  return 0;
+	return 0;
 }
